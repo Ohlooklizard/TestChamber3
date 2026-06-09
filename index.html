@@ -189,7 +189,7 @@
 </div>
 
  <!-- GLaDOS  -->
-         <img id="gladosButton" src="glados.jpg" alt="GLaDOS Button" class="glados-button">
+         <img id="gladosButton" src="glados.ppg" alt="GLaDOS Button" class="glados-button">
     
     <audio id="gladosAudio" src="glados.mp3" ></audio>
 
@@ -245,6 +245,9 @@
 
      <script>
 
+        let wrongToggle = 1;
+    let backgroundToggle = 1;
+       
          // Dog toggle
     let isdog2 = false;
        
@@ -345,6 +348,14 @@
         wrongAudio.currentTime = 0;
         wrongAudio.play();
      }
+
+       wrongAudio.currentTime = 0;
+        wrongAudio.play();
+
+        wrongToggle = wrongToggle === 1 ? 2 : 3 : 4;
+      }
+    });
+       
   </script>
 </body>
 </html>
