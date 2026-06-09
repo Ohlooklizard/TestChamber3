@@ -387,22 +387,17 @@
     } else {
       wrongAttempt++;
 
-      let audioToPlay;
+       const wrongAudio =
+      wrongAttempt === 1 ? document.getElementById("wrong1Audio") :
+      wrongAttempt === 2 ? document.getElementById("wrong2Audio") :
+      wrongAttempt === 3 ? document.getElementById("wrong3Audio") :
+      document.getElementById("wrong4Audio");
 
-      if (wrongAttempt === 1) {
-        audioToPlay = document.getElementById("wrong1Audio");
-      } else if (wrongAttempt === 2) {
-        audioToPlay = document.getElementById("wrong2Audio");
-      } else if (wrongAttempt === 3) {
-        audioToPlay = document.getElementById("wrong3Audio");
-      } else {
-        audioToPlay = document.getElementById("wrong4Audio");
-      }
-
-      audioToPlay.currentTime = 0;
-      audioToPlay.play();
-    }
+    wrongAudio.currentTime = 0;
+    wrongAudio.play();
   }
+}
+   
 </script>
 </body>
 </html>
