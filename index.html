@@ -85,34 +85,80 @@
       z-index: 30;
     }
 
+      .answer-box {
+      text-align: center;
+      text-shadow: 0 2px 4px black;
+    }
+
+    .answer-box label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .answer-box input {
+      padding: 6px;
+      font-size: 15px;
+      width: 175px;
+    }
+
+    .answer-box button {
+      padding: 6px 10px;
+      font-size: 15px;
+      cursor: pointer;
+    }
     
   </style>
 </head>
 
   <body>
-
+    
     <div id="loadingScreen" onclick="closeLoadingScreen()">
   <img src="loading.jpg" alt="Loading Screen">
 </div>
 
-
+ <!-- GLaDOS audio -->
      <audio id="gladosAudio" src="glados.mp3" ></audio>
-    <audio id="manAudio" src="man.mp3"></audio>
+
+     <!-- Invisible man audio -->
+  <div onclick="document.getElementById('manaudio').play()" class="invisible-zone"></div>
+  <audio id="=Manaudio" src="man.mp3"></audio>
+
+     <!-- doggo button audio-->
   <audio id="dogAudio" src="dog.mp3"></audio>
 
+     <!-- wrong answer audio -->
+  <audio id="wrong1Audio" src="wrong1.mp3"></audio>
+  <audio id="wrong2Audio" src="wrong2.mp3"></audio>
+
+     <!-- radio audios -->
+  <audio id="radio-audio1" src="1hlstatic.mp3"></audio>
+  <audio id="radio-audio2" src="2birbs.mp3"></audio>
+  <audio id="radio-audio3" src="3glados.mp3"></audio>
+  <audio id="radio-audio4" src="4cowboy.mp3"></audio>
+  <audio id="radio-audio5" src="5static.mp3"></audio>
+  <audio id="radio-audio6" src="6gman.mp3"></audio>
+    
+     <img id="gladosButton" src="glados.jpg" alt="GLaDOS Button" class="glados-button">
+    
      <img
-    id="dogButton"
+    id="dog-Button"
     src="dog.jpg"
     alt="Dog Button"
-    class="dog-button"
+    class="middle-right-button"
+    onclick="toggleBucket()"
   />
 
      <button
     id="invisibleZone"
     class="invisible-zone"
-    aria-label="Definitely do not touch this"
+    aria-label="Man button"
   ></button>
 
+    <!-- radio button -->
+    ???
+    
      <script>
 
     const GladosAudio = document.getElementById("gladosAudio");
@@ -121,5 +167,9 @@
     const dogButton = document.getElementById("dogButton");
     const invisibleZone = document.getElementById("invisibleZone");
 
+       
+
+
+       
 
     
