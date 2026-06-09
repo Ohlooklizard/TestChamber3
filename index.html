@@ -108,6 +108,76 @@
       font-size: 15px;
       cursor: pointer;
     }
+
+    #room-radio {
+  position: fixed;
+  bottom: 12vh;
+  left: 12vw;
+  width: 180px;
+  cursor: pointer;
+}
+
+#radio-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 420px;
+  padding: 35px 25px 30px;
+  background-color: #8fcf8f;
+  border: 8px solid #245c38;
+  border-radius: 18px;
+
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  z-index: 50;
+}
+
+#radio-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+
+  background-color: #245c38;
+  color: white;
+  border: none;
+  font-size: 18px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+#frequency-display {
+  background-color: #102b1a;
+  color: #9cff9c;
+  border: 3px solid #245c38;
+  border-radius: 8px;
+
+  font-size: 42px;
+  font-family: monospace;
+  padding: 18px;
+  margin-bottom: 28px;
+
+  text-shadow: 0 0 8px #9cff9c;
+}
+
+#radio-controls button {
+  background-color: #245c38;
+  color: white;
+  border: 3px solid #102b1a;
+  border-radius: 8px;
+
+  font-size: 28px;
+  padding: 10px 22px;
+  margin: 0 8px;
+  cursor: pointer;
+}
+
+#radio-controls button:hover,
+#radio-close:hover {
+  background-color: #163b25;
+}
     
   </style>
 </head>
@@ -149,8 +219,22 @@
   <audio id="wrong2Audio" src="wrong2.mp3"></audio>
 
      <!-- radio  -->
-     <img id="upButton" src="up.jpg" alt="up arrow Button" class="up-button">
-     <img id="downButton" src="down.jpg" alt="down arrow Button" class="down-button">
+<img id="room-radio" src="radio.jpg" onclick="openRadio()" alt="Radio">
+
+<!-- Radio popup -->
+<div id="radio-popup">
+  <button id="radio-close" onclick="closeRadio()">X</button>
+
+  <div id="frequency-display">87.5 FM</div>
+
+  <div id="radio-controls">
+    <button onclick="previousStation()">&lt;</button>
+    <button onclick="togglePlay()" id="play-button">PLAY</button>
+    <button onclick="nextStation()">&gt;</button>
+  </div>
+</div>
+
+<audio id="radio-audio"></audio>
     
   <audio id="radio-audio1" src="1hlstatic.mp3"></audio>
   <audio id="radio-audio2" src="2birbs.mp3"></audio>
@@ -181,8 +265,81 @@
     const dogButton = document.getElementById("dogButton");
     const invisibleZone = document.getElementById("invisibleZone");
     const wrongAudio = document.getElementById("wrongAudio");
+
+  const stations = [
+    { frequency: "87.5 FM", audio: "1hlstatic.mp3" },
+    { frequency: "89.5 FM", audio: "2birbs.mp3" },
+    { frequency: "92.2 FM", audio: "3glados.mp3" },
+    { frequency: "95.7 FM", audio: "4cowboy.mp3" },
+    { frequency: "98.3 FM", audio: "5static.mp3" },
+    { frequency: "99.4 FM", audio: "6gman.mp3" }
+  ];
+
+  let currentStation = 0;
+  let isPlaying = false;
+
+  const popup = document.getElementById("radio-popup");
+  const frequencyDisplay = document.getElementById("frequency-display");
+  const radioAudio = document.getElementById("radio-audio");
+  const playButton = document.getElementById("play-button");
+
+  function openRadio() {
+    popup.style.display = "block";
+    updateStation();
+  }
+
+  function closeRadio() {
+    popup.style.display = "none";
+    radioAudio.pause();
+    radioAudio.currentTime = 0;
+    isPlaying = false;
+    playButton.textContent = "PLAY";
+  }
+
+  function updateStation() {
+    frequencyDisplay.textContent = stations[currentStation].frequency;
+    radioAudio.src = stations[currentStation].audio;
+
+    radioAudio.pause();
+    radioAudio.currentTime = 0;
+    isPlaying = false;
+    playButton.textContent = "PLAY";
+  }
+
+  function previousStation() {
+    currentStation--;
+
+    if (currentStation < 0) {
+      currentStation = stations.length - 1;
+    }
+
+    updateStation();
+  }
+
+  function nextStation() {
+    currentStation++;
+
+    if (currentStation >= stations.length) {
+      currentStation = 0;
+    }
+
+    updateStation();
+  }
+
+  function togglePlay() {
+    if (isPlaying) {
+      radioAudio.pause();
+      isPlaying = false;
+      playButton.textContent = "PLAY";
+    } else {
+      radioAudio.currentTime = 0;
+      radioAudio.play();
+      isPlaying = true;
+      playButton.textContent = "STOP";
+    }
+
        
-   if (userInput === "2228694") {
+   if (userInput === "9228694") {
         window.location.href = "https://ohlooklizard.github.io/outside/";
       } else {
         wrongAudio.currentTime = 0;
