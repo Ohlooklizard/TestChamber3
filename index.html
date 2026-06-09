@@ -118,58 +118,80 @@
   <img src="loading.jpg" alt="Loading Screen">
 </div>
 
- <!-- GLaDOS audio -->
-     <audio id="gladosAudio" src="glados.mp3" ></audio>
+ <!-- GLaDOS  -->
+         <img id="gladosButton" src="glados.jpg" alt="GLaDOS Button" class="glados-button">
+    
+    <audio id="gladosAudio" src="glados.mp3" ></audio>
 
-     <!-- Invisible man audio -->
+     <!-- Invisible man -->
+         <button
+    id="invisibleZone"
+    class="invisible-zone"
+    aria-label="Man button"
+  ></button>
+    
   <div onclick="document.getElementById('manaudio').play()" class="invisible-zone"></div>
   <audio id="=Manaudio" src="man.mp3"></audio>
 
-     <!-- doggo button audio-->
-  <audio id="dogAudio" src="dog.mp3"></audio>
+     <!-- doggo button-->
+     <img
+    id="dog-Button"
+    src="dog1.jpg"
+    alt="Dog Button"
+    class="middle-right-button"
+    onclick="toggleBucket()"
+  />
+    
+    <audio id="dogAudio" src="dog.mp3"></audio>
 
      <!-- wrong answer audio -->
   <audio id="wrong1Audio" src="wrong1.mp3"></audio>
   <audio id="wrong2Audio" src="wrong2.mp3"></audio>
 
-     <!-- radio audios -->
+     <!-- radio  -->
+     <img id="upButton" src="up.jpg" alt="up arrow Button" class="up-button">
+     <img id="downButton" src="down.jpg" alt="down arrow Button" class="down-button">
+    
   <audio id="radio-audio1" src="1hlstatic.mp3"></audio>
   <audio id="radio-audio2" src="2birbs.mp3"></audio>
   <audio id="radio-audio3" src="3glados.mp3"></audio>
   <audio id="radio-audio4" src="4cowboy.mp3"></audio>
   <audio id="radio-audio5" src="5static.mp3"></audio>
   <audio id="radio-audio6" src="6gman.mp3"></audio>
-    
-     <img id="gladosButton" src="glados.jpg" alt="GLaDOS Button" class="glados-button">
-    
-     <img
-    id="dog-Button"
-    src="dog.jpg"
-    alt="Dog Button"
-    class="middle-right-button"
-    onclick="toggleBucket()"
-  />
 
-     <button
-    id="invisibleZone"
-    class="invisible-zone"
-    aria-label="Man button"
-  ></button>
-
-    <!-- radio button -->
-    ???
-    
      <script>
+
+         // Dog toggle
+    let isdog2 = false;
+       
+    function toggledog() {
+      const img = document.getElementById("dog-button");
+      const audio = document.getElementById("dog-audio");
+
+      img.src = isDog2 ? "dog1.jpg" : "dog2.jpg";
+      isDog2 = !isDog2;
+
+      audio.currentTime = 0;
+      audio.play();
+    }
 
     const GladosAudio = document.getElementById("gladosAudio");
     const dogAudio = document.getElementById("dogAudio");
     const manAudio = document.getElementById("manAudio");
     const dogButton = document.getElementById("dogButton");
     const invisibleZone = document.getElementById("invisibleZone");
-
+    const wrongAudio = document.getElementById("wrongAudio");
        
+   if (userInput === "2228694") {
+        window.location.href = "https://ohlooklizard.github.io/outside/";
+      } else {
+        wrongAudio.currentTime = 0;
+        wrongAudio.play();
+     }
+  </script>
+</body>
+</html>
 
 
-       
 
     
