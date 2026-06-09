@@ -189,30 +189,23 @@
 </div>
 
  <!-- GLaDOS  -->
-         <img id="gladosButton" src="glados.ppg" alt="GLaDOS Button" class="glados-button">
-    
-    <audio id="gladosAudio" src="glados.mp3" ></audio>
+    <img id="gladosButton" src="glados.png" alt="GLaDOS Button" class="glados-button">
+    <audio id="gladosAudio" src="glados.mp3"></audio>
 
      <!-- Invisible man -->
-         <button
-    id="invisibleZone"
-    class="invisible-zone"
-    aria-label="Man button"
-  ></button>
-    
-  <div onclick="document.getElementById('manaudio').play()" class="invisible-zone"></div>
-  <audio id="=Manaudio" src="man.mp3"></audio>
+      <button id="invisibleZone" class="invisible-zone" aria-label="Man button"></button>
+    <audio id="manAudio" src="man.mp3"></audio>
 
      <!-- doggo button-->
-     <img
-    id="dog-Button"
-    src="dog1.jpg"
-    alt="Dog Button"
-    class="middle-right-button"
-    onclick="toggleBucket()"
-  />
-    
-    <audio id="dogAudio" src="dog.mp3"></audio>
+<img
+  id="dog-button"
+  src="dog1.jpg"
+  alt="Dog Button"
+  class="dog-button"
+  onclick="toggleDog()"
+/>
+
+<audio id="dog-audio" src="dog.mp3"></audio>
 
      <!-- wrong answer audio -->
   <audio id="wrong1Audio" src="wrong1.mp3"></audio>
@@ -243,31 +236,61 @@
   <audio id="radio-audio5" src="5static.mp3"></audio>
   <audio id="radio-audio6" src="6gman.mp3"></audio>
 
-     <script>
+<audio id="wrong1Audio" src="wrong1.mp3"></audio>
+<audio id="wrong2Audio" src="wrong2.mp3"></audio>
+<audio id="wrong3Audio" src="wrong3.mp3"></audio>
+<audio id="wrong4Audio" src="wrong4.mp3"></audio>
 
-        let wrongToggle = 1;
-       
-         // Dog toggle
-    let isdog2 = false;
-       
-    function toggledog() {
-      const img = document.getElementById("dog-button");
-      const audio = document.getElementById("dog-audio");
+    <div class="answer-box">
+  <label for="answer">Enter code:</label>
+  <input id="answer" type="text">
+  <button onclick="checkAnswer()">Submit</button>
+</div>
+    
+    <script>
+  // Loading screen
+  function closeLoadingScreen() {
+    const loadingScreen = document.getElementById("loadingScreen");
+    loadingScreen.style.opacity = "0";
 
-      img.src = isDog2 ? "dog1.jpg" : "dog2.jpg";
-      isDog2 = !isDog2;
+    setTimeout(() => {
+      loadingScreen.style.display = "none";
+    }, 1000);
+  }
 
-      audio.currentTime = 0;
-      audio.play();
-    }
+  // GLaDOS intro
+  const gladosButton = document.getElementById("gladosButton");
+  const gladosAudio = document.getElementById("gladosAudio");
 
-    const GladosAudio = document.getElementById("gladosAudio");
-    const dogAudio = document.getElementById("dogAudio");
-    const manAudio = document.getElementById("manAudio");
-    const dogButton = document.getElementById("dogButton");
-    const invisibleZone = document.getElementById("invisibleZone");
-    const wrongAudio = document.getElementById("wrongAudio");
+  gladosButton.addEventListener("click", () => {
+    gladosAudio.currentTime = 0;
+    gladosAudio.play();
+  });
 
+  // Invisible man
+  const invisibleZone = document.getElementById("invisibleZone");
+  const manAudio = document.getElementById("manAudio");
+
+  invisibleZone.addEventListener("click", () => {
+    manAudio.currentTime = 0;
+    manAudio.play();
+  });
+
+  // Dog toggle
+  let isDog2 = false;
+
+  function toggleDog() {
+    const img = document.getElementById("dog-button");
+    const audio = document.getElementById("dog-audio");
+
+    img.src = isDog2 ? "dog1.jpg" : "dog2.jpg";
+    isDog2 = !isDog2;
+
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  // Radio
   const stations = [
     { frequency: "87.5 FM", audio: "1hlstatic.mp3" },
     { frequency: "89.5 FM", audio: "2birbs.mp3" },
@@ -339,23 +362,36 @@
       isPlaying = true;
       playButton.textContent = "STOP";
     }
+  }
 
-       
-   if (userInput === "9228694") {
-        window.location.href = "https://ohlooklizard.github.io/outside/";
+  // Answer checking
+  let wrongAttempt = 0;
+
+  function checkAnswer() {
+    const userInput = document.getElementById("answer").value.trim();
+
+    if (userInput === "9228694") {
+      window.location.href = "https://ohlooklizard.github.io/outside/";
+    } else {
+      wrongAttempt++;
+
+      let audioToPlay;
+
+      if (wrongAttempt === 1) {
+        audioToPlay = document.getElementById("wrong1Audio");
+      } else if (wrongAttempt === 2) {
+        audioToPlay = document.getElementById("wrong2Audio");
+      } else if (wrongAttempt === 3) {
+        audioToPlay = document.getElementById("wrong3Audio");
       } else {
-        wrongAudio.currentTime = 0;
-        wrongAudio.play();
-     }
-
-       wrongAudio.currentTime = 0;
-        wrongAudio.play();
-
-        wrongToggle = wrongToggle === 1 ? 2 : 3 : 4;
+        audioToPlay = document.getElementById("wrong4Audio");
       }
-    });
-       
-  </script>
+
+      audioToPlay.currentTime = 0;
+      audioToPlay.play();
+    }
+  }
+</script>
 </body>
 </html>
 
